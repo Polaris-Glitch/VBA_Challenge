@@ -1,0 +1,247 @@
+' To Do
+' loop through all stocks for one year and out put this info in new columns
+    ' the ticker symbol
+    ' yearly change from the opening price the the beginning of a year to the closing price at the end of the year
+    ' same as above, but calculate the percentage change
+    ' the total stock volume
+' add functionality to return the stock with "greatest % increase, decrease" and "greatest total volume"
+' run on every worksheet at once
+
+
+Sub Stocks():
+
+' loop through all sheets'  
+For Each ws in worksheets
+
+' Variables'
+ Dim Cells(i , 1).Value as integer
+ Cells(i , 1).Value = 1
+ Dim Yearly Change as double
+ Dim percent Change as double
+ 
+ LastRow= ws.cells(Rows.Count,1).End(xlup).Row
+
+ ' Loop through rows in the column
+  For i = 2 To LastRow
+
+    ' Searches for when the value of the next cell is different than that of the current cell
+    If Cells(i + 1, column).Value <> Cells(i, column).Value Then
+
+      ' If value is different, add 1 to the intger
+      Cells(i + 1, column).value = Cells(i,column).value + 1
+
+    End If
+
+  Next i
+
+
+    ' New Columns'
+           ws.Range("I1").EntireColumn.Insert
+            ws.Range("J1").EntireColumn.Insert
+            ws.Range("K1").EntireColumn.Insert
+            ws.Range("L1").EntireColumn.Insert
+
+        'Column Labels'
+            ws.Cells(1, 9).Value = "Ticker"
+            ws.Cells(1, 10).Value = "Yearly Change"
+            ws.Cells(1, 11).Value = "Percent Change"
+            ws.Cells(1, 12).Value = "Total Stock Volume" 
+
+        'Add to all rows'
+            ws.Range("I2:I" & LastRow) = 
+            ws.Range("J2:J" & LastRow) = 
+            ws.Range("K2:K" & LastRow) = 
+            ws.Range("L2:L" & LastRow) = 
+
+msgbox ("New Data Columns Complete")
+
+next ws
+End Sub 
+
+
+' create new column
+    ws.Range("I1").EntireColumn.Insert
+
+' label it ticker
+    ws.Cells(1,9).Value = "Ticker"
+
+'take data in "a" and move it to "i" 
+    Range("A2:A").copy
+    Range("I2:I").Paste
+
+'delete duplicate data
+    ws.Range("I2:I" & LastRow).RemoveDuplicates
+    Range("I1:I" & LastRow).RemoveDuplicates Header:=xlYes
+    Range("I1:I" & LastRow).RemoveDuplicates Columns:=9 Header:=xlYes
+
+'conditional for yearly change
+    for i = 2 to LastRow
+      If cells(i,1).Value = Cells(i,9).Value Then
+      cells(i,10).value = cells(Lastrow,6).value - Cells(i,3).value 
+
+'conditional for percent change
+
+
+Sub test():
+' Create variables
+  LastRow = Cells(Rows.Count, 1).End(xlUp).Row
+
+  Dim Yearly_Change As Double
+  
+  Dim Percent_Change As Double
+  
+  Dim Ticker As String
+
+  Dim Total_Volume As Double
+  Total_Volume = 0
+
+  ' declare summary table
+  Dim Summary_Table_Row As Integer
+  Summary_Table_Row = 2
+
+' Name columns I, J, K, and L
+    Cells(1, 9).Value = "Ticker"
+    Cells(1, 10).Value = "Yearly Change"
+    Cells(1, 11).Value = "Percent Change"
+    Cells(1, 12).Value = "Total Volume"
+
+  ' Loop through all stocks
+  For i = 2 To LastRow
+
+    ' Compare ticker value
+    If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
+
+      ' Ticker Value
+      Ticker = Cells(i, 1).Value
+
+      ' Add to the Total volume
+      Total_Volume = Total_Volume + Cells(i, 7).Value
+
+      ' Create Summary Table for Ticker and Total volume
+      Range("I" & Summary_Table_Row).Value = Ticker
+      Range("L" & Summary_Table_Row).Value = Total_Volume
+
+      ' Add one to the summary table row
+      Summary_Table_Row = Summary_Table_Row + 1
+      
+      ' Reset the Brand Total
+      Total_Volume = 0
+
+    ' If the cell immediately following a row is the same ticker...
+    Else
+
+      ' Add to the Total_Volume
+      Total_Volume = Total_Volume + Cells(i, 7).Value
+
+    End If
+
+        ' 
+       '  x= closing value
+       ' y= opening value
+        
+        If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
+        x = Range(“F” & i).Value
+
+        elseif Cells(i - 1, 1).Value <> Cells(i,1).value Then
+        y = Range("C" & i).value
+
+        end if
+            
+        
+        ' calculations
+        Yearly_Change = x - y
+        Cells(i, 10).Value = Yearly_Change
+
+        Percent_Change = (x-y)100
+        Cells(i, 11).value = Percent_Change
+
+
+    If cells(i,10).Value > 0 Then
+    cells(i, 10).interior.colorindex = 4
+
+    elseif cells(i,10).value < 0 Then
+    cells(i, 10).interior.colorindex = 3
+
+  Next i
+
+  Dim Max_increase as double
+  Max_increase = Cells(2,16).Value
+  
+  Dim Min as double
+  Min = Cells(3,16).Value
+
+  Dim Max_total as long
+  Max_total = Cells(4,16)
+
+  
+  ' functionality script
+  Max_increase = application.worksheetfunction.max(range("K:K"))
+  Min = application.worksheetfunction.min(range("K:K"))
+  Max_total = application.worksheetfunction.max(range("L:L"))
+ 
+ if cells(2,17).value =
+
+End Sub
+
+
+
+' chat GPT version
+Sub test()
+    ' Create variables
+    Dim LastRow As Long
+    Dim Yearly_Change As Double
+    Dim Percent_Change As Double
+    Dim Ticker As String
+    Dim Total_Volume As Double
+    Dim Summary_Table_Row As Integer
+    
+    LastRow = Cells(Rows.Count, 1).End(xlUp).Row
+    Summary_Table_Row = 2
+
+    ' Name columns I, J, K, and L
+    Cells(1, 9).Value = "Ticker"
+    Cells(1, 10).Value = "Yearly Change"
+    Cells(1, 11).Value = "Percent Change"
+    Cells(1, 12).Value = "Total Volume"
+
+    ' Loop through all stocks
+    For i = 2 To LastRow
+        If Cells(i + 1, 1).Value <> Cells(i, 1).Value Then
+            ' Ticker Value
+            Ticker = Cells(i, 1).Value
+            
+            ' Add to the Total volume
+            Total_Volume = Total_Volume + Cells(i, 7).Value
+            
+            ' Create Summary Table for Ticker and Total volume
+            Range("I" & Summary_Table_Row).Value = Ticker
+            Range("L" & Summary_Table_Row).Value = Total_Volume
+            
+            ' Calculate yearly change and percent change
+            Dim x As Double
+            Dim y As Double
+            x = Range("F" & i).Value
+            y = Range("C" & i).Value
+            Yearly_Change = x - y
+            Percent_Change = (Yearly_Change / y) * 100
+            
+            ' Output yearly change and percent change
+            Cells(i, 10).Value = Yearly_Change
+            Cells(i, 11).Value = Percent_Change
+            
+            ' Conditional formatting
+            If Yearly_Change > 0 Then
+                Cells(i, 10).Interior.ColorIndex = 4
+            ElseIf Yearly_Change < 0 Then
+                Cells(i, 10).Interior.ColorIndex = 3
+            End If
+            
+            ' Reset Total_Volume and move to the next row in the summary table
+            Total_Volume = 0
+            Summary_Table_Row = Summary_Table_Row + 1
+        Else
+            ' Add to the Total_Volume
+            Total_Volume = Total_Volume + Cells(i, 7).Value
+        End If
+    Next i
+End Sub
